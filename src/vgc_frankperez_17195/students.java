@@ -16,7 +16,7 @@ public class students extends javax.swing.JFrame {
        erase();
        deactivate();
        show_data("");
-    
+       
     }
     
     void show_data(String value){
