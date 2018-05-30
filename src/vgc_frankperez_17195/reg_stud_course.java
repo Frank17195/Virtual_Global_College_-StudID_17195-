@@ -250,7 +250,8 @@ sql = "INSERT INTO reg_stud_course (idstudent, CourseNumb) VALUES (?,?)";
     }//GEN-LAST:event_Rnew_buttonActionPerformed
 
     private void Rcancel_buttonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Rcancel_buttonActionPerformed
-    Rerase();  // TODO add your handling code here:
+    Rerase();
+    Rdeactivate();
     }//GEN-LAST:event_Rcancel_buttonActionPerformed
 
     private void Rexit_buttonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Rexit_buttonActionPerformed
