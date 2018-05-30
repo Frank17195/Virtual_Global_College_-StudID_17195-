@@ -88,6 +88,7 @@ DefaultTableModel model;
         Rsave_button = new javax.swing.JButton();
         jScrollPane1 = new javax.swing.JScrollPane();
         table_reg_stud = new javax.swing.JTable();
+        jButton1 = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -103,6 +104,8 @@ DefaultTableModel model;
         jLabel4.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         jLabel4.setText("Course Code");
 
+        Rexit_button.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
+        Rexit_button.setForeground(new java.awt.Color(204, 0, 0));
         Rexit_button.setText("Exit");
         Rexit_button.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -144,6 +147,13 @@ DefaultTableModel model;
         ));
         jScrollPane1.setViewportView(table_reg_stud);
 
+        jButton1.setText("Return");
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
@@ -160,23 +170,25 @@ DefaultTableModel model;
                             .addComponent(text_Rcourse, javax.swing.GroupLayout.PREFERRED_SIZE, 97, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(text_Rstud, javax.swing.GroupLayout.PREFERRED_SIZE, 97, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addGap(212, 212, 212))
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                        .addGroup(jPanel1Layout.createSequentialGroup()
-                            .addComponent(Rnew_button)
-                            .addGap(38, 38, 38)
-                            .addComponent(Rsave_button)
-                            .addGap(33, 33, 33)
-                            .addComponent(Rcancel_button)
-                            .addGap(32, 32, 32)
-                            .addComponent(Rexit_button)
-                            .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                        .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                            .addComponent(jLabel1)
-                            .addGap(76, 76, 76)))))
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                        .addComponent(jLabel1)
+                        .addGap(76, 76, 76))))
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addGap(21, 21, 21)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(0, 37, Short.MAX_VALUE))
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addGap(61, 61, 61)
+                .addComponent(Rnew_button)
+                .addGap(18, 18, 18)
+                .addComponent(Rsave_button)
+                .addGap(18, 18, 18)
+                .addComponent(Rcancel_button)
+                .addGap(18, 18, 18)
+                .addComponent(jButton1)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(Rexit_button)
+                .addGap(29, 29, 29))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -196,7 +208,8 @@ DefaultTableModel model;
                     .addComponent(Rexit_button)
                     .addComponent(Rcancel_button)
                     .addComponent(Rsave_button)
-                    .addComponent(Rnew_button))
+                    .addComponent(Rnew_button)
+                    .addComponent(jButton1))
                 .addGap(33, 33, 33)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap())
@@ -255,8 +268,13 @@ sql = "INSERT INTO reg_stud_course (idstudent, CourseNumb) VALUES (?,?)";
     }//GEN-LAST:event_Rcancel_buttonActionPerformed
 
     private void Rexit_buttonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Rexit_buttonActionPerformed
-this.dispose();        // TODO add your handling code here:
+   System.exit(0);
     }//GEN-LAST:event_Rexit_buttonActionPerformed
+
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+        new Level_Admin().setVisible(true);
+        this.setVisible(false);        // TODO add your handling code here:
+    }//GEN-LAST:event_jButton1ActionPerformed
 
     /**
      * @param args the command line arguments
@@ -298,6 +316,7 @@ this.dispose();        // TODO add your handling code here:
     private javax.swing.JButton Rexit_button;
     private javax.swing.JButton Rnew_button;
     private javax.swing.JButton Rsave_button;
+    private javax.swing.JButton jButton1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel4;

@@ -92,6 +92,7 @@ DefaultTableModel model;
         Att_ExitButton = new javax.swing.JButton();
         jScrollPane1 = new javax.swing.JScrollPane();
         Att_Table = new javax.swing.JTable();
+        jButton1 = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -131,6 +132,8 @@ DefaultTableModel model;
             }
         });
 
+        Att_ExitButton.setFont(new java.awt.Font("Tahoma", 0, 12)); // NOI18N
+        Att_ExitButton.setForeground(new java.awt.Color(153, 0, 102));
         Att_ExitButton.setText("Exit");
         Att_ExitButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -151,12 +154,19 @@ DefaultTableModel model;
         ));
         jScrollPane1.setViewportView(Att_Table);
 
+        jButton1.setText("Return");
+        jButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton1ActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGap(84, 84, 84)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -170,18 +180,21 @@ DefaultTableModel model;
                                     .addComponent(text_Attcourse, javax.swing.GroupLayout.PREFERRED_SIZE, 117, javax.swing.GroupLayout.PREFERRED_SIZE)
                                     .addComponent(text_Attstud, javax.swing.GroupLayout.PREFERRED_SIZE, 117, javax.swing.GroupLayout.PREFERRED_SIZE)
                                     .addComponent(text_Attperc, javax.swing.GroupLayout.PREFERRED_SIZE, 117, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                            .addComponent(jLabel1)
-                            .addGroup(jPanel1Layout.createSequentialGroup()
-                                .addComponent(Att_NewButton)
-                                .addGap(18, 18, 18)
-                                .addComponent(Att_SaveButton)
-                                .addGap(18, 18, 18)
-                                .addComponent(Att_CancelButton)
-                                .addGap(18, 18, 18)
-                                .addComponent(Att_ExitButton))))
+                            .addComponent(jLabel1)))
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addContainerGap()
-                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 444, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 444, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGap(51, 51, 51)
+                        .addComponent(Att_NewButton)
+                        .addGap(18, 18, 18)
+                        .addComponent(Att_SaveButton)
+                        .addGap(18, 18, 18)
+                        .addComponent(Att_CancelButton)
+                        .addGap(18, 18, 18)
+                        .addComponent(jButton1)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(Att_ExitButton)))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
@@ -206,10 +219,11 @@ DefaultTableModel model;
                     .addComponent(Att_ExitButton)
                     .addComponent(Att_CancelButton)
                     .addComponent(Att_SaveButton)
-                    .addComponent(Att_NewButton))
+                    .addComponent(Att_NewButton)
+                    .addComponent(jButton1))
                 .addGap(44, 44, 44)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 236, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(26, Short.MAX_VALUE))
+                .addContainerGap(25, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -237,7 +251,7 @@ DefaultTableModel model;
     }//GEN-LAST:event_Att_CancelButtonActionPerformed
 
     private void Att_ExitButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Att_ExitButtonActionPerformed
-    this.dispose();         // TODO add your handling code here:
+   System.exit(0);
     }//GEN-LAST:event_Att_ExitButtonActionPerformed
 
     private void Att_SaveButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_Att_SaveButtonActionPerformed
@@ -270,6 +284,11 @@ sql = "INSERT INTO student_attendance (idstudent, CourseNumb,PercentageOfAttend)
         }
 
     }//GEN-LAST:event_Att_SaveButtonActionPerformed
+
+    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+        new Level_Admin().setVisible(true);
+        this.setVisible(false);        // TODO add your handling code here:
+    }//GEN-LAST:event_jButton1ActionPerformed
 
     /**
      * @param args the command line arguments
@@ -312,6 +331,7 @@ sql = "INSERT INTO student_attendance (idstudent, CourseNumb,PercentageOfAttend)
     private javax.swing.JButton Att_NewButton;
     private javax.swing.JButton Att_SaveButton;
     private javax.swing.JTable Att_Table;
+    private javax.swing.JButton jButton1;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
