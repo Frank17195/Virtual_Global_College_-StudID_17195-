@@ -24,7 +24,7 @@ String query;
         connect = con.conexion();
         st = connect.createStatement();
         rs = st.executeQuery(query);
-        while(rs.next()){
+        while(rs.next()){           
         if (rs.getString(1)== null)
             sw = 0;
         else
