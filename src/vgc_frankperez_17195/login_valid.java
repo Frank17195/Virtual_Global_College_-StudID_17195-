@@ -1,21 +1,26 @@
 
 package vgc_frankperez_17195;
+import java.sql.Connection;
+import java.sql.DriverManager;
 
-import java.sql.*;
-import java.util.logging.Level;
-import java.util.logging.Logger;
-import javax.swing.JOptionPane;
 
 
 public class login_valid {
-vgc_students con = new vgc_students();    
+  static Connection con;
+  
+  public static Connection getConnection() {
+      try{
+    Class.forName("com.mysql.jdbc.Driver");      
+    con = DriverManager.getConnection( "jdbc:mysql://localhost:3306/17195_frank_perez_vgc", "root", "Frank@1234" );    
+      }catch(Exception ex){
+       System.out.println(""+ex);
+      }
+      return con;
+  }
 
-// Connection Variables
-Connection connect = null; 
-Statement st = null;
-ResultSet rs = null;
-String query;
 
+
+/*
     public boolean verify(String user, String pwr) {
     int sw =0;
     query = "select * from security where UserName='" +user+"'and Password='"+pwr+"'";
@@ -37,6 +42,7 @@ String query;
         if (sw ==1) return true;
         else return false;
         
-    }   
+    } 
+    */
 
 }

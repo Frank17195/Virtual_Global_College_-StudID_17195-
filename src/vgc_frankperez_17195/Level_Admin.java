@@ -17,6 +17,11 @@ public class Level_Admin extends javax.swing.JFrame {
     public Level_Admin() {
         initComponents();
     }
+    
+    public Level_Admin(String Uname) {
+        initComponents();
+        jLabel1.setText(Uname);
+    }
 
     /**
      * This method is called from within the constructor to initialize the form.
