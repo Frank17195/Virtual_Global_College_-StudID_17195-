@@ -206,11 +206,16 @@ else{
                  setVisible(false);
                 
              }
-              if(option.equalsIgnoreCase("students")&& sl.equalsIgnoreCase("students")){
+             else if(option.equalsIgnoreCase("students")&& sl.equalsIgnoreCase("students")){
                  Level_Students stu = new Level_Students(un);
                  stu.setVisible(true);
                  setVisible(false);
              }
+             else {
+             
+             JOptionPane.showMessageDialog(rootPane, "Level doesn't match", "Login Error", 1);
+             }
+             
        }else{
        
           JOptionPane.showMessageDialog(rootPane, "Username or Password don't match", "Login Error", 1);
