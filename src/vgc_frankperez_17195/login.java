@@ -191,7 +191,7 @@ JOptionPane.showMessageDialog(rootPane, "Some fields are empty", "Error", 1);
 else{
     try{
        connect = login_valid.getConnection();
-       pst = connect.prepareStatement("select * from security where UserName=? and Password=?");
+       pst = connect.prepareStatement("select * from security where UserName=? and idstudent=?");
        pst.setString(1, uname);
        pst.setString(2, pword);
        rs = pst.executeQuery();
@@ -199,6 +199,7 @@ else{
        if(rs.next()){
            String sl =rs.getString("option");
            String un = rs.getString("UserName");
+           String ids = rs.getString("idstudent");
            
              if(option.equalsIgnoreCase("admin")&& sl.equalsIgnoreCase("admin")){
                  Level_Admin ad = new Level_Admin(un);
@@ -207,7 +208,7 @@ else{
                 
              }
              else if(option.equalsIgnoreCase("students")&& sl.equalsIgnoreCase("students")){
-                 Level_Students stu = new Level_Students(un);
+                 Level_Students stu = new Level_Students(ids);
                  stu.setVisible(true);
                  setVisible(false);
              }
