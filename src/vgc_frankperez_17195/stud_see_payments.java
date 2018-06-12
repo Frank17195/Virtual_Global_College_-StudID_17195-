@@ -1,65 +1,68 @@
 
 package vgc_frankperez_17195;
+
 import java.sql.*;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 
-public class perc_attend_stud extends javax.swing.JFrame {
+public class stud_see_payments extends javax.swing.JFrame {
 DefaultTableModel model;
 
-    public perc_attend_stud() {
+    public stud_see_payments() {
         initComponents();
-        retrieving1();
-        show_data2(txt_search_perc.getText()); 
-        //show_data2("");
+        retrieving2();
+        show_data3(txt_stud.getText()); 
+        
     }
-
-void retrieving1(){
-    txt_search_perc.setText(Level_Students.txt_passw.getText());
-    txt_search_perc.setVisible(false);
-    }
-
     
-    void retrievingBack2(){
-    Level_Students.txt_passw.setText(perc_attend_stud.txt_search_perc.getText());
+    void retrievingBack1(){
+    Level_Students.txt_passw.setText(stud_see_payments.txt_stud.getText());
     Level_Students.txt_passw.setVisible(false);
     }
-
-
-
     
-    void show_data2(String value){
-    String [] heads = {"name","surname","course","percent_attend"};
-    String [] registers = new String [4];
-    String sql = "select Name,surname,Course,PercentageOfAttend\n" +
-"from student, student_attendance, courses\n" +
-"where student.idstudent = student_attendance.idstudent\n" +
-"and courses.CourseNumb = student_attendance.CourseNumb\n" +
-"and student.idstudent LIKE '%" + value +"%'"  ;
     
+    void retrieving2(){
+    txt_stud.setText(Level_Students.txt_passw.getText());
+    txt_stud.setVisible(false);
+    }
+ 
+    
+    void show_data3(String value){
+    String [] heads = {"name","surname","total amount","deposit","amount due","date of deposit"};
+    String [] registers = new String [6];
+    
+String sql = "select Name,surname,TotalAmount,Deposit,AmountDue,Date_Of_Deposit\n" +
+"from student, payment_of_fee\n" +
+"where student.idstudent = payment_of_fee.idstudent\n" +
+"and student.idstudent LIKE '%" + value +"%'"  ;     
+
     model = new DefaultTableModel(null,heads);
     
     vgc_students cc = new vgc_students();
     Connection cn = cc.conexion();
-    
-    Statement st;
+
+        Statement st;
         try {
             st = cn.createStatement();
             ResultSet rs = st.executeQuery(sql);
             
             while (rs.next()){
-            registers[0]=rs.getString("Name"); //as seen on MySQL tables
+            registers[0]=rs.getString("Name"); // As seen on MySQL DB tables
             registers[1]=rs.getString("surname");
-            registers[2]=rs.getString("Course");
-            registers[3]=rs.getString("PercentageOfAttend");
+            registers[2]=rs.getString("TotalAmount");
+            registers[3]=rs.getString("Deposit");
+            registers[4]=rs.getString("AmountDue");
+            registers[5]=rs.getString("Date_Of_Deposit");
             model.addRow(registers);
             }
-            table_perc.setModel(model);
+            table_payments.setModel(model);
         } catch (SQLException ex) {
             JOptionPane.showMessageDialog(null, ex);
         }
+
+    
     }
 
     /**
@@ -73,11 +76,11 @@ void retrieving1(){
 
         jPanel1 = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
+        txt_stud = new javax.swing.JTextField();
         jScrollPane1 = new javax.swing.JScrollPane();
-        table_perc = new javax.swing.JTable();
-        txt_search_perc = new javax.swing.JTextField();
-        jButton2 = new javax.swing.JButton();
+        table_payments = new javax.swing.JTable();
         jButton1 = new javax.swing.JButton();
+        button_exit_fee = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -85,9 +88,9 @@ void retrieving1(){
 
         jLabel1.setFont(new java.awt.Font("Tahoma", 1, 24)); // NOI18N
         jLabel1.setForeground(new java.awt.Color(204, 255, 255));
-        jLabel1.setText("Percentage of Attendance");
+        jLabel1.setText("Payment Of Fees");
 
-        table_perc.setModel(new javax.swing.table.DefaultTableModel(
+        table_payments.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
                 {},
                 {},
@@ -98,22 +101,7 @@ void retrieving1(){
 
             }
         ));
-        jScrollPane1.setViewportView(table_perc);
-
-        txt_search_perc.addKeyListener(new java.awt.event.KeyAdapter() {
-            public void keyReleased(java.awt.event.KeyEvent evt) {
-                txt_search_percKeyReleased(evt);
-            }
-        });
-
-        jButton2.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
-        jButton2.setForeground(new java.awt.Color(153, 0, 153));
-        jButton2.setText("EXIT");
-        jButton2.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton2ActionPerformed(evt);
-            }
-        });
+        jScrollPane1.setViewportView(table_payments);
 
         jButton1.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
         jButton1.setText("RETURN");
@@ -123,43 +111,53 @@ void retrieving1(){
             }
         });
 
+        button_exit_fee.setFont(new java.awt.Font("Tahoma", 1, 12)); // NOI18N
+        button_exit_fee.setForeground(new java.awt.Color(255, 0, 51));
+        button_exit_fee.setText("EXIT");
+        button_exit_fee.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                button_exit_feeActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
-                .addContainerGap(26, Short.MAX_VALUE)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(22, 22, 22))
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGap(93, 93, 93)
-                        .addComponent(jLabel1))
+                        .addGap(135, 135, 135)
+                        .addComponent(jButton1)
+                        .addGap(50, 50, 50)
+                        .addComponent(button_exit_fee))
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addContainerGap()
-                        .addComponent(txt_search_perc, javax.swing.GroupLayout.PREFERRED_SIZE, 54, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(jPanel1Layout.createSequentialGroup()
-                        .addGap(156, 156, 156)
-                        .addComponent(jButton1)
-                        .addGap(92, 92, 92)
-                        .addComponent(jButton2)))
+                        .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 460, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addGroup(jPanel1Layout.createSequentialGroup()
+                                .addComponent(txt_stud, javax.swing.GroupLayout.PREFERRED_SIZE, 44, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(104, 104, 104)
+                                .addComponent(jLabel1)))))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel1Layout.createSequentialGroup()
-                .addContainerGap()
-                .addComponent(txt_search_perc, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(11, 11, 11)
-                .addComponent(jLabel1)
-                .addGap(43, 43, 43)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 220, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 78, Short.MAX_VALUE)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addContainerGap()
+                        .addComponent(txt_stud, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(jPanel1Layout.createSequentialGroup()
+                        .addGap(22, 22, 22)
+                        .addComponent(jLabel1)))
+                .addGap(18, 18, 18)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 187, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 48, Short.MAX_VALUE)
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jButton1)
-                    .addComponent(jButton2))
-                .addGap(83, 83, 83))
+                    .addComponent(button_exit_fee)
+                    .addComponent(jButton1))
+                .addGap(49, 49, 49))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -176,18 +174,14 @@ void retrieving1(){
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void txt_search_percKeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txt_search_percKeyReleased
-       // TODO add your handling code here:
-    }//GEN-LAST:event_txt_search_percKeyReleased
-
-    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
+    private void button_exit_feeActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_button_exit_feeActionPerformed
 System.exit(0);        // TODO add your handling code here:
-    }//GEN-LAST:event_jButton2ActionPerformed
+    }//GEN-LAST:event_button_exit_feeActionPerformed
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         new Level_Students().setVisible(true);
         this.setVisible(false);
-        retrievingBack2();
+        retrievingBack1();
         // TODO add your handling code here:
     }//GEN-LAST:event_jButton1ActionPerformed
 
@@ -208,31 +202,31 @@ System.exit(0);        // TODO add your handling code here:
                 }
             }
         } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(perc_attend_stud.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(stud_see_payments.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(perc_attend_stud.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(stud_see_payments.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(perc_attend_stud.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(stud_see_payments.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(perc_attend_stud.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+            java.util.logging.Logger.getLogger(stud_see_payments.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
         //</editor-fold>
 
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new perc_attend_stud().setVisible(true);
+                new stud_see_payments().setVisible(true);
             }
         });
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton button_exit_fee;
     private javax.swing.JButton jButton1;
-    private javax.swing.JButton jButton2;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JScrollPane jScrollPane1;
-    private javax.swing.JTable table_perc;
-    public static javax.swing.JTextField txt_search_perc;
+    private javax.swing.JTable table_payments;
+    public static javax.swing.JTextField txt_stud;
     // End of variables declaration//GEN-END:variables
 }
